@@ -39,4 +39,8 @@
     <Folder Include="Services\Notifier\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
 </Project>

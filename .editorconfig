@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CA2253: 已命名占位符不应是数值
+dotnet_diagnostic.CA2253.severity = none

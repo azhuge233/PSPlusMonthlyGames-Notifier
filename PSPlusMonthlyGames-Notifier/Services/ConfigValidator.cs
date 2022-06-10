@@ -2,7 +2,6 @@
 using PSPlusMonthlyGames_Notifier.Models.Config;
 using PSPlusMonthlyGames_Notifier.Strings;
 
-
 namespace PSPlusMonthlyGames_Notifier.Services {
     internal class ConfigValidator: IDisposable {
 		private readonly ILogger<ConfigValidator> _logger;
