@@ -21,8 +21,7 @@ namespace PSPlusMonthlyGames_Notifier {
                     servicesProvider.GetRequiredService<ConfigValidator>().CheckValid(config);
 
                     // Get page source
-                    var source = await servicesProvider.GetRequiredService<Scraper>().GetUbisoftSource(config);
-                    //var source = System.IO.File.ReadAllText("test.html");
+                    var source = servicesProvider.GetRequiredService<Scraper>().GetPSBlogSource();
 
                     // Parse page source
                     var parseResult = servicesProvider.GetRequiredService<Parser>().Parse(source, oldRecord);

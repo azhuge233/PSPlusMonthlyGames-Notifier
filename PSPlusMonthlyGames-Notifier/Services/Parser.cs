@@ -1,52 +1,52 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 using HtmlAgilityPack;
 using PSPlusMonthlyGames_Notifier.Strings;
 using PSPlusMonthlyGames_Notifier.Models.Record;
+using PSPlusMonthlyGames_Notifier.Modules;
 
 namespace PSPlusMonthlyGames_Notifier.Services {
 	internal class Parser : IDisposable {
 		private readonly ILogger<Parser> _logger;
+		private readonly IServiceProvider services = DI.BuildDiScraperOnly();
 
 		public Parser(ILogger<Parser> logger) {
 			_logger = logger;
 		}
 
-		public Tuple<List<FreeGameRecord>, List<FreeGameRecord>> Parse(string source, List<FreeGameRecord> oldRecords) {
+		public Tuple<List<FreeGameRecord>, List<FreeGameRecord>> Parse(HtmlDocument htmlDoc, List<FreeGameRecord> oldRecords) {
 			try {
 				_logger.LogDebug(ParseString.debugHtmlParser);
 
 				var resultList = new List<FreeGameRecord>();
 				var pushList = new List<FreeGameRecord>();
-				var freePageDoc = new HtmlDocument();
 
-				freePageDoc.LoadHtml(source);
-				var freePageGiveaways = freePageDoc.DocumentNode.SelectNodes(ParseString.giveawayPageFreeGamesXPath);
+				var postcards = htmlDoc.DocumentNode.SelectNodes(ParseString.postcardXPath);
 
-				if (freePageGiveaways != null) {
-					foreach (var freeGame in freePageGiveaways) {
-						var aLable = freeGame.SelectSingleNode(ParseString.giveawayPageFreeGameALableXPath);
+				foreach (var postcard in postcards) {
+					var blogLinkTag = postcard.SelectSingleNode(ParseString.titleXPath);
+					var title = blogLinkTag.InnerText.Trim();
+					var link = blogLinkTag.Attributes["href"].Value;
 
-						string gameName = aLable.Attributes[ParseString.giveawayPageFreeGameNameAttr].Value.Split(ParseString.giveawayPageFreeGameNameExtension)[0];
-						string gameUrl = aLable.Attributes[ParseString.giveawayPageFreeGameUrlAttr].Value;
-						string freeType = freeGame.SelectSingleNode(ParseString.giveawayPageFreeTypeXPath).InnerText;
+					_logger.LogDebug(ParseString.debugArticleFound, title);
 
-						if (freeType == ParseString.giveawayPageFreeTypeString) {
-							_logger.LogInformation(ParseString.infoGameFound, gameName);
+					if (ParseString.TitleKeywords.Any(words => !title.Contains(words))) _logger.LogDebug(ParseString.debugSkipBlog, title);
+					else {
+						var freeGame = new FreeGameRecord() {
+							Url = link,
+							Title = title,
+							SubTitle = GetBlogContent(link).DocumentNode.SelectSingleNode(ParseString.subHeaderXPath).InnerText.Trim()
+						};
 
-							var newFreeGame = new FreeGameRecord() {
-								Name = gameName,
-								Url = gameUrl
-							};
+						resultList.Add(freeGame);
 
-							resultList.Add(newFreeGame);
-
-							if (oldRecords.Count == 0 || !oldRecords.Exists(record => record.Name == gameName && record.Url == gameUrl)) {
-								pushList.Add(newFreeGame);
-								_logger.LogInformation(ParseString.infoAddToList, gameName);
-							} else _logger.LogInformation(ParseString.infoFoundInPreviousRecords, gameName);
-						}
+						if (!oldRecords.Any(record => record == freeGame)) {
+							_logger.LogInformation(ParseString.infoAddArticleToList, title);
+							pushList.Add(freeGame);
+						} else _logger.LogDebug(ParseString.debugFoundInPreviousRecords, title);
 					}
-				} else _logger.LogInformation(ParseString.debugNoRecordDetected);
+					_logger.LogDebug(Environment.NewLine);
+				}
 
 				_logger.LogDebug($"Done: {ParseString.debugHtmlParser}");
 				return new Tuple<List<FreeGameRecord>, List<FreeGameRecord>>(resultList, pushList);
@@ -55,6 +55,20 @@ namespace PSPlusMonthlyGames_Notifier.Services {
 				throw;
 			} finally {
 				Dispose();
+			}
+		}
+
+		private HtmlDocument GetBlogContent(string url) {
+			try {
+				_logger.LogDebug(ParseString.debugGetBlogContent, url);
+
+				var source = services.GetRequiredService<Scraper>().GetHtmlSource(url);
+
+				_logger.LogDebug($"Done: {ParseString.debugGetBlogContent}", url);
+				return source;
+			} catch (Exception) {
+				_logger.LogError($"Error: {ParseString.debugGetBlogContent}", url);
+				throw;
 			}
 		}
 
