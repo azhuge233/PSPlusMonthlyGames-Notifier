@@ -1,11 +1,15 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>PSPlusMonthlyGames_Notifier</RootNamespace>
+	<RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
+	<PublishSingleFile Condition="'$(Configuration)' == 'Release'">true</PublishSingleFile>
+    <PublishTrimmed>true</PublishTrimmed>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <SatelliteResourceLanguages>en;zh-Hans</SatelliteResourceLanguages>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,6 +21,22 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="NLog.Extensions.Logging" Version="5.0.0" />
     <PackageReference Include="Telegram.Bot" Version="17.0.0" />
+  </ItemGroup>
+
+	<Target Name="CopyNlogConfigAfterBuild" AfterTargets="AfterBuild">
+		<Copy SourceFiles="Config File\nlog.config" DestinationFolder="$(OutDir)" />
+	</Target>
+	<Target Name="CopyNlogConfigOnPublish" AfterTargets="Publish">
+		<Copy SourceFiles="Config File\nlog.config" DestinationFolder="$(PublishDir)" />
+	</Target>
+
+	<ItemGroup>
+		<None Update="Config File\config.json" CopyToOutputDirectory="PreserveNewest" />
+		<None Update="Records\records.json" CopyToOutputDirectory="PreserveNewest" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\Notifier\" />
   </ItemGroup>
 
 </Project>
