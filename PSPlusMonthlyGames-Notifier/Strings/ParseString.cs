@@ -7,7 +7,7 @@
 		#endregion
 
 		#region Blog Page Related
-		internal static readonly List<string> TitleKeywords = new() { "PlayStation Plus", "月", "遊戲", "《", "》" };
+		internal static readonly List<string> TitleKeywords = new() { "PlayStation Plus", "月", "遊戲" };
 		#endregion
 
 		internal const string removeSpecialCharsRegex = @"[^0-9a-zA-Z]+";
