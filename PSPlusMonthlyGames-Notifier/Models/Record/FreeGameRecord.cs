@@ -35,6 +35,10 @@ namespace PSPlusMonthlyGames_Notifier.Models.Record {
             return new StringBuilder().AppendFormat(NotifyFormatString.pushDeerPushFormat, Title, SubTitle, Url).ToString();
         }
 
+        internal string ToDiscordMessage() {
+            return new StringBuilder().AppendFormat(NotifyFormatString.discordPushFormat, SubTitle, Url).ToString();
+        }
+
         public static bool operator ==(FreeGameRecord a, FreeGameRecord b) { 
             if(ReferenceEquals(a, b)) return true;
             if(a is null || b is null) return false;

@@ -29,6 +29,10 @@
 		internal const string dingTalkPushFormat = qqPushFormat;
 
 		internal const string pushDeerPushFormat = qqPushFormat;
+
+		internal const string discordPushFormat =
+			"***{0}***\n\n" +
+			"链接: {1}";
 		#endregion
 
 		#region url, title format string

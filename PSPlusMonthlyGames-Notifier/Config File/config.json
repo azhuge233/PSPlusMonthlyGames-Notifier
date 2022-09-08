@@ -6,6 +6,7 @@
   "EnablePushPlus": false,
   "EnableDingTalk": false,
   "EnablePushDeer": false,
+  "EnableDiscord": false,
 
   "TelegramToken": "",
   "TelegramChatID": "",
@@ -22,6 +23,8 @@
   "DingTalkBotToken": "",
 
   "PushDeerToken": "",
+
+  "DiscordWebhookURL": "",
 
   "SMTPServer": "",
   "SMTPPort": 465,

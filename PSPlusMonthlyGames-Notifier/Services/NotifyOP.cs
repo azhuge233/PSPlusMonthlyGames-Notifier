@@ -5,6 +5,7 @@ using PSPlusMonthlyGames_Notifier.Models.Config;
 using PSPlusMonthlyGames_Notifier.Models.Record;
 using PSPlusMonthlyGames_Notifier.Strings;
 using PSPlusMonthlyGames_Notifier.Services.Notifier;
+using IndiegalaFreebieNotifier.Notifier;
 
 namespace PSPlusMonthlyGames_Notifier.Services {
 	internal class NotifyOP : IDisposable {
@@ -59,6 +60,12 @@ namespace PSPlusMonthlyGames_Notifier.Services {
 						_logger.LogInformation(NotifyOPString.debugEnabledFormat, "PushDeer");
 						await services.GetRequiredService<PushDeer>().SendMessage(config, pushList);
 					} else _logger.LogInformation(NotifyOPString.debugDisabledFormat, "PushDeer");
+
+					// Discord notifications
+					if (config.EnableDiscord) {
+						_logger.LogInformation(NotifyOPString.debugEnabledFormat, "Discord");
+						await services.GetRequiredService<Discord>().SendMessage(config, pushList);
+					} else _logger.LogInformation(NotifyOPString.debugEnabledFormat, "Discord");
 
 					// Email notifications
 					if (config.EnableEmail) {

@@ -30,5 +30,8 @@
 
 		public bool EnableDingTalk { get; set; }
 		public string DingTalkBotToken { get; set; }
+
+		public bool EnableDiscord { get; set; }
+		public string DiscordWebhookURL { get; set; }
 	}
 }

@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using PSPlusMonthlyGames_Notifier.Models;
+using PSPlusMonthlyGames_Notifier.Models.PostContent;
 using PSPlusMonthlyGames_Notifier.Models.Config;
 using PSPlusMonthlyGames_Notifier.Models.Record;
 using PSPlusMonthlyGames_Notifier.Strings;
@@ -26,7 +26,7 @@ namespace PSPlusMonthlyGames_Notifier.Services.Notifier {
 				var resp = new HttpResponseMessage();
 
 				foreach (var record in records) {
-					content.text.content = $"{record.ToDingTalkMessage()}{NotifyFormatString.projectLink}";
+					content.Text.Content_ = $"{record.ToDingTalkMessage()}{NotifyFormatString.projectLink}";
 					data = new StringContent(JsonConvert.SerializeObject(content), Encoding.UTF8, "application/json");
 					resp = await client.PostAsync(url, data);
 					_logger.LogDebug(await resp.Content.ReadAsStringAsync());
