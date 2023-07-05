@@ -18,7 +18,9 @@ dotnet publish -c Release -o /your/path/here -r [win-x64/osx-x64/linux-x64/...] 
 
 ## Usage
 
-Set your telegram bot token and chat ID in config.json.
+1. Set `InfoSource` in config.json.
+   - Only `PSBlog` and `PSNine` are available.
+2. Set your telegram bot token and chat ID in config.json.
 
 Check [wiki](https://github.com/azhuge233/SteamDB-FreeGames-dotnet/wiki/Config-Description) for more explanations, only notify varaibles are available for this project.
 
