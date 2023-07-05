@@ -1,4 +1,7 @@
 ﻿{
+  "_comment": "Choose the info source: 'PSBlog' or 'PSNine'",
+  "InfoSource": "PSBlog",
+
   "EnableTelegram": true,
   "EnableBark": false,
   "EnableEmail": false,

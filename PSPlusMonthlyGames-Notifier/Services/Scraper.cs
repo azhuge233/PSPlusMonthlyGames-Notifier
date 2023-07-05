@@ -1,5 +1,6 @@
 ﻿using HtmlAgilityPack;
 using Microsoft.Extensions.Logging;
+using PSPlusMonthlyGames_Notifier.Models.Config;
 using PSPlusMonthlyGames_Notifier.Strings;
 
 namespace PSPlusMonthlyGames_Notifier.Services {
@@ -10,21 +11,25 @@ namespace PSPlusMonthlyGames_Notifier.Services {
 			_logger = logger;
 		}
 
-		public HtmlDocument GetPSBlogSource() {
+		public HtmlDocument GetSource(Config config) {
+			string url = ScrapeString.UrlMap[config.InfoSource.ToLower()];
+			_logger.LogDebug(ScrapeString.debugGetPageSource, url);
+
 			try {
-				_logger.LogDebug(ScrapeString.debugGetPSBlogSource);
-				var htmlDoc = GetHtmlSource(ScrapeString.PSBlogUrl);
-				_logger.LogDebug($"Done: {ScrapeString.debugGetPSBlogSource}");
+				var webGet = new HtmlWeb();
+				var htmlDoc = webGet.Load(url);
+				_logger.LogDebug($"Done: {ScrapeString.debugGetPageSource}", url);
 				return htmlDoc;
 			} catch (Exception) {
-				_logger.LogError($"Error: {ScrapeString.debugGetPSBlogSource}");
+				_logger.LogError($"Error: {ScrapeString.debugGetPageSource}", url);
 				throw;
 			}
 		}
 
-		public HtmlDocument GetHtmlSource(string url) {
+		public HtmlDocument GetPostContent(string url) {
+			_logger.LogDebug(ScrapeString.debugGetPageSource, url);
+
 			try {
-				_logger.LogDebug(ScrapeString.debugGetPageSource, url);
 				var webGet = new HtmlWeb();
 				var htmlDoc = webGet.Load(url);
 				_logger.LogDebug($"Done: {ScrapeString.debugGetPageSource}", url);

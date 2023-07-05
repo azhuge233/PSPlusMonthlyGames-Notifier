@@ -21,10 +21,10 @@ namespace PSPlusMonthlyGames_Notifier {
                     servicesProvider.GetRequiredService<ConfigValidator>().CheckValid(config);
 
                     // Get page source
-                    var source = servicesProvider.GetRequiredService<Scraper>().GetPSBlogSource();
+                    var source = servicesProvider.GetRequiredService<Scraper>().GetSource(config);
 
                     // Parse page source
-                    var parseResult = servicesProvider.GetRequiredService<Parser>().Parse(source, oldRecord);
+                    var parseResult = servicesProvider.GetRequiredService<Parser>().Parse(source, oldRecord, config);
 
                     // Notify first, then write records
                     await servicesProvider.GetRequiredService<NotifyOP>().Notify(config, parseResult.Item2);
