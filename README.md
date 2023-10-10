@@ -22,7 +22,7 @@ dotnet publish -c Release -p:PublishDir=/your/path/here -r [win-x64/osx-x64/linu
    - Only `PSBlog` and `PSNine` are available.
 2. Set your telegram bot token and chat ID in config.json.
 
-Check [wiki](https://github.com/azhuge233/PSPlusMonthlyGames-Notifier/wiki) for more explanations.
+Check [wiki](https://github.com/azhuge233/PSPlusMonthlyGames-Notifier/wiki) for more explanation.
 
 ### Repeatedly running
 
