@@ -22,7 +22,7 @@ dotnet publish -c Release -p:PublishDir=/your/path/here -r [win-x64/osx-x64/linu
    - Only `PSBlog` and `PSNine` are available.
 2. Set your telegram bot token and chat ID in config.json.
 
-Check [wiki](https://github.com/azhuge233/SteamDB-FreeGames-dotnet/wiki/Config-Description) for more explanations, only notify varaibles are available for this project.
+Check [wiki](https://github.com/azhuge233/PSPlusMonthlyGames-Notifier/wiki) for more explanations.
 
 ### Repeatedly running
 
