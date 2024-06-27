@@ -5,24 +5,24 @@
 			"<b>PS Plus Monthly Games</b>\n\n" +
 			"<b>{0}</b>\n\n" +
 			"<i>{1}</i>\n\n" +
-			"链接：<a href=\"{2}\">{0}</a>\n\n" +
+			"Link：<a href=\"{2}\">{0}</a>\n\n" +
 			"#PlayStation #PSPlus";
 
 		internal const string barkPushFormat =
 			"{0}\n\n" +
 			"{1}\n\n" +
-			"链接：{2}";
+			"Link：{2}";
 
 		internal const string emailPushHtmlFormat =
 			"<b>{0}</b><br><br>" +
 			"{1}<br><br>" +
-			"链接: <a href=\"{2}\" >{0}</a><br>";
+			"Link: <a href=\"{2}\" >{0}</a><br>";
 
 		internal const string qqPushFormat =
 			imTitle +
 			"{0}\n\n" +
 			"{1}\n\n" +
-			"链接: {2}";
+			"Link: {2}";
 
 		internal const string pushPlusPushHtmlFormat = emailPushHtmlFormat;
 
@@ -32,7 +32,7 @@
 
 		internal const string discordPushFormat =
 			"***{0}***\n\n" +
-			"链接: {1}";
+			"Link: {1}";
 		#endregion
 
 		#region url, title format string
