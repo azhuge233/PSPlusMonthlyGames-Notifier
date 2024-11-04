@@ -19,7 +19,7 @@ namespace PSPlusMonthlyGames_Notifier.Services.Notifier {
 			try {
 				foreach (var record in records) {
 					_logger.LogDebug($"{NotifierString.debugTelegramSendMessage} : {record.Title}");
-					await BotClient.SendTextMessageAsync(
+					await BotClient.SendMessage(
 						chatId: config.TelegramChatID ?? string.Empty,
 						text: $"{record.ToTelegramMessage()}{NotifyFormatString.projectLinkHTML.Replace("<br>", "\n")}",
 						parseMode: ParseMode.Html
