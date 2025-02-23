@@ -73,7 +73,7 @@ namespace PSPlusMonthlyGames_Notifier.Services {
 					if (config.EnableDiscord) {
 						_logger.LogInformation(NotifyOPString.debugEnabledFormat, "Discord");
 						notifyTasks.Add(services.GetRequiredService<Discord>().SendMessage(config, pushList));
-					} else _logger.LogInformation(NotifyOPString.debugEnabledFormat, "Discord");
+					} else _logger.LogInformation(NotifyOPString.debugDisabledFormat, "Discord");
 
 					// Email notifications
 					if (config.EnableEmail) {
