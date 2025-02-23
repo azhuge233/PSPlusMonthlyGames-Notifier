@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using PSPlusMonthlyGames_Notifier.Models.Config;
 using PSPlusMonthlyGames_Notifier.Models.Record;
 using PSPlusMonthlyGames_Notifier.Strings;
-using SteamDBFreeGames.Models.PostContent;
+using PSPlusMonthlyGames_Notifier.Models.PostContent;
 using System.Text;
 
 namespace PSPlusMonthlyGames_Notifier.Services.Notifier {
