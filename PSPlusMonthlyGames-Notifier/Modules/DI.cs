@@ -28,6 +28,7 @@ namespace PSPlusMonthlyGames_Notifier.Modules {
                .AddTransient<DingTalk>()
                .AddTransient<PushDeer>()
                .AddTransient<Discord>()
+               .AddTransient<Meow>()
                .AddLogging(loggingBuilder => {
                    // configure Logging with NLog
                    loggingBuilder.ClearProviders();
@@ -48,6 +49,7 @@ namespace PSPlusMonthlyGames_Notifier.Modules {
                .AddTransient<DingTalk>()
                .AddTransient<PushDeer>()
 			   .AddTransient<Discord>()
+			   .AddTransient<Meow>()
 			   .AddLogging(loggingBuilder => {
                    // configure Logging with NLog
                    loggingBuilder.ClearProviders();

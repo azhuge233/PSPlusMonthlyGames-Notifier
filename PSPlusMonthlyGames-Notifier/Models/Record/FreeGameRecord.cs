@@ -7,6 +7,7 @@ namespace PSPlusMonthlyGames_Notifier.Models.Record {
         public string Title { get; set; }
         public string SubTitle { get; set; }
 
+        #region ToMessage()
         internal string ToTelegramMessage() {
             return new StringBuilder().AppendFormat(NotifyFormatString.telegramPushFormat, Title, SubTitle, Url).ToString();
         }
@@ -39,7 +40,13 @@ namespace PSPlusMonthlyGames_Notifier.Models.Record {
             return new StringBuilder().AppendFormat(NotifyFormatString.discordPushFormat, SubTitle, Url).ToString();
         }
 
-        public static bool operator ==(FreeGameRecord a, FreeGameRecord b) { 
+		internal string ToMeowMessage() {
+			return new StringBuilder().AppendFormat(NotifyFormatString.meowPushFormat, Title, SubTitle, Url).ToString();
+		}
+		#endregion
+
+		#region function methods
+		public static bool operator ==(FreeGameRecord a, FreeGameRecord b) { 
             if(ReferenceEquals(a, b)) return true;
             if(a is null || b is null) return false;
 
@@ -64,5 +71,6 @@ namespace PSPlusMonthlyGames_Notifier.Models.Record {
 		public override int GetHashCode() {
 			return Title.GetHashCode();
 		}
+		#endregion
 	}
 }

@@ -40,5 +40,9 @@
   "FromEmailAddress": "",
   "ToEmailAddress": "",
   "AuthAccount": "",
-  "AuthPassword": ""
+  "AuthPassword": "",
+
+  "EnableMeow": false,
+  "MeowAddress": "https://api.chuckfang.com",
+  "MeowNickname": ""
 }

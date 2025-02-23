@@ -33,6 +33,11 @@
 		internal const string discordPushFormat =
 			"***{0}***\n\n" +
 			"Link: {1}";
+
+		internal const string meowPushFormat =
+			"{0}\n\n" +
+			"{1}\n\n" +
+			"Link：{2}";
 		#endregion
 
 		#region url, title format string
@@ -63,6 +68,9 @@
 		internal const string dingTalkUrlFormat = "https://oapi.dingtalk.com/robot/send?access_token={0}";
 
 		internal const string pushDeerUrlFormat = "https://api2.pushdeer.com/message/push?pushkey={0}&&text={1}";
+
+		internal const string meowUrlFormat = "{0}/{1}";
+		internal const string meowUrlTitle = "PSPlusMonthlyGamesNotifier";
 		#endregion
 
 		internal const string projectLink = "\n\nFrom https://github.com/azhuge233/PSPlusMonthlyGames-Notifier";
