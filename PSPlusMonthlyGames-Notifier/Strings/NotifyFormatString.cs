@@ -56,8 +56,8 @@
 		internal const string emailTitleFormat = htmlTitleFormat;
 		internal const string emailBodyFormat = htmlBodyFormat;
 
-		internal const string qqUrlFormat = "http://{0}:{1}/send_private_msg?access_token={2}";
-		internal const string qqRedUrlFormat = "ws://{0}:{1}/?access_token={2}";
+		internal const string qqHttpUrlFormat = "http://{0}:{1}/send_private_msg?access_token={2}";
+		internal const string qqWebSocketUrlFormat = "ws://{0}:{1}/?access_token={2}";
 		internal const string qqWebSocketSendAction = "send_private_msg";
 
 		internal const string pushPlusTitleFormat = htmlTitleFormat;
