@@ -56,10 +56,9 @@
 		internal const string emailTitleFormat = htmlTitleFormat;
 		internal const string emailBodyFormat = htmlBodyFormat;
 
-		internal const string qqUrlFormat = "http://{0}:{1}/send_private_msg?user_id={2}&message=";
-		internal const string qqRedUrlFormat = "ws://{0}:{1}";
-		internal const string qqRedWSConnectPacketType = "meta::connect";
-		internal const string qqRedWSSendPacketType = "message::send";
+		internal const string qqUrlFormat = "http://{0}:{1}/send_private_msg?access_token={2}";
+		internal const string qqRedUrlFormat = "ws://{0}:{1}/?access_token={2}";
+		internal const string qqWebSocketSendAction = "send_private_msg";
 
 		internal const string pushPlusTitleFormat = htmlTitleFormat;
 		internal const string pushPlusBodyFormat = htmlBodyFormat;

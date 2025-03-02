@@ -1,16 +1,16 @@
 ﻿using System.Text;
-using System.Web;
 using Microsoft.Extensions.Logging;
-using HtmlAgilityPack;
 using PSPlusMonthlyGames_Notifier.Models.Config;
 using PSPlusMonthlyGames_Notifier.Models.Record;
 using PSPlusMonthlyGames_Notifier.Strings;
+using PSPlusMonthlyGames_Notifier.Models.PostContent;
+using Newtonsoft.Json;
 
 namespace PSPlusMonthlyGames_Notifier.Services.Notifier {
-    internal class QQPusher: INotifiable {
-		private readonly ILogger<QQPusher> _logger;
+    internal class QQHttp: INotifiable {
+		private readonly ILogger<QQHttp> _logger;
 
-		public QQPusher(ILogger<QQPusher> logger) {
+		public QQHttp(ILogger<QQHttp> logger) {
 			_logger = logger;
 		}
 
@@ -18,21 +18,26 @@ namespace PSPlusMonthlyGames_Notifier.Services.Notifier {
 			try {
 				_logger.LogDebug(NotifierString.debugQQPusherSendMessage);
 
-				string url = new StringBuilder().AppendFormat(NotifyFormatString.qqUrlFormat, config.QQAddress, config.QQPort, config.ToQQID).ToString();
-				var sb = new StringBuilder();
-				var webGet = new HtmlWeb();
-				var resp = new HtmlDocument();
+				string url = string.Format(NotifyFormatString.qqUrlFormat, config.QQHttpAddress, config.QQHttpPort, config.QQHttpToken);
+
+				var client = new HttpClient();
+
+				var content = new QQHttpPostContent {
+					UserID = config.ToQQID
+				};
+
+				var data = new StringContent(string.Empty);
+				var resp = new HttpResponseMessage();
 
 				foreach (var record in records) {
 					_logger.LogDebug($"{NotifierString.debugQQPusherSendMessage} : {record.Title}");
-					resp = await webGet.LoadFromWebAsync(
-						new StringBuilder()
-							.Append(url)
-							.Append(HttpUtility.UrlEncode(record.ToQQMessage()))
-							.Append(HttpUtility.UrlEncode(NotifyFormatString.projectLink))
-							.ToString()
-					);
-					_logger.LogDebug(resp.Text);
+
+					content.Message = $"{record.ToQQMessage()}{NotifyFormatString.projectLink}";
+
+					data = new StringContent(JsonConvert.SerializeObject(content), Encoding.UTF8, "application/json");
+					resp = await client.PostAsync(url, data);
+
+					_logger.LogDebug(await resp.Content.ReadAsStringAsync());
 				}
 
 				_logger.LogDebug($"Done: {NotifierString.debugQQPusherSendMessage}");
