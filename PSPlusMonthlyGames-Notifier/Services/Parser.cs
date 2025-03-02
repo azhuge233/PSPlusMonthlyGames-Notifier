@@ -110,7 +110,7 @@ namespace PSPlusMonthlyGames_Notifier.Services {
 						var contents = contentDiv.SelectSingleNode(ParseString.PSNineContentBoldXPath);
 						var sb = new StringBuilder();
 
-						if (contents != null && !contents.InnerText.StartsWith("*") &&
+						if (contents != null && !contents.InnerText.StartsWith('*') &&
 							!ParseString.PSNineContentBreakKeywords.All(contents.InnerText.Contains)) {
 							foreach (var content in contents.ChildNodes) {
 								var text = content.InnerText;
@@ -120,7 +120,7 @@ namespace PSPlusMonthlyGames_Notifier.Services {
 						} else {
 							foreach (var content in contentDiv.ChildNodes) {
 								var text = content.InnerText;
-								if (text.StartsWith("*") && ParseString.PSNineContentBreakKeywords.All(text.Contains)) break;
+								if (text.StartsWith('*') && ParseString.PSNineContentBreakKeywords.All(text.Contains)) break;
 								if (content.NodeType == HtmlNodeType.Text)
 									sb.Append($"{content.InnerText.Trim()}\n");
 							}
