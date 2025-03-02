@@ -9,7 +9,7 @@
 		#endregion
 
 		#region QQHttp debug strings
-		internal const string debugQQPusherSendMessage = "Send notifications to QQ";
+		internal const string debugQQHttpSendMessage = "Send notifications to QQ Http";
 		#endregion
 
 		#region QQWebSocket debug strings

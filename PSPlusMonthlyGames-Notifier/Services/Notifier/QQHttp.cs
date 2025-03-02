@@ -16,7 +16,7 @@ namespace PSPlusMonthlyGames_Notifier.Services.Notifier {
 
 		public async Task SendMessage(NotifyConfig config, List<FreeGameRecord> records) {
 			try {
-				_logger.LogDebug(NotifierString.debugQQPusherSendMessage);
+				_logger.LogDebug(NotifierString.debugQQHttpSendMessage);
 
 				string url = string.Format(NotifyFormatString.qqHttpUrlFormat, config.QQHttpAddress, config.QQHttpPort, config.QQHttpToken);
 
@@ -30,7 +30,7 @@ namespace PSPlusMonthlyGames_Notifier.Services.Notifier {
 				var resp = new HttpResponseMessage();
 
 				foreach (var record in records) {
-					_logger.LogDebug($"{NotifierString.debugQQPusherSendMessage} : {record.Title}");
+					_logger.LogDebug($"{NotifierString.debugQQHttpSendMessage} : {record.Title}");
 
 					content.Message = $"{record.ToQQMessage()}{NotifyFormatString.projectLink}";
 
@@ -40,9 +40,9 @@ namespace PSPlusMonthlyGames_Notifier.Services.Notifier {
 					_logger.LogDebug(await resp.Content.ReadAsStringAsync());
 				}
 
-				_logger.LogDebug($"Done: {NotifierString.debugQQPusherSendMessage}");
+				_logger.LogDebug($"Done: {NotifierString.debugQQHttpSendMessage}");
 			} catch (Exception) {
-				_logger.LogError($"Error: {NotifierString.debugQQPusherSendMessage}");
+				_logger.LogError($"Error: {NotifierString.debugQQHttpSendMessage}");
 				throw;
 			} finally {
 				Dispose();
