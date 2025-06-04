@@ -1,6 +1,6 @@
 # PSPlusMonthlyGames-Notifier
 
-A CLI tool fetches monthly free games info from [PlayStation PSPlus Blog page](https://blog.zh-hant.playstation.com/category/ps-plus/) (HK region), sends notifications through Telegram, Email, Bark, QQ, PushPlus, DingTalk, PushDeer, Discord and MeoW.
+A CLI tool fetches monthly free games info from [PSNine](https://psnine.com/psnid/sakauenachi/topic) or [PlayStation PSPlus Blog page](https://blog.zh-hant.playstation.com/category/ps-plus/) (HK), sends notifications through Telegram, Email, Bark, QQ, PushPlus, DingTalk, PushDeer, Discord and MeoW.
 
 Demo Telegram Channel [@azhuge233_FreeGames](https://t.me/azhuge233_FreeGames)
 
