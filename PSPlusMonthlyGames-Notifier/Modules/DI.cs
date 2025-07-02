@@ -9,12 +9,14 @@ using PSPlusMonthlyGames_Notifier.Services.Notifier;
 
 namespace PSPlusMonthlyGames_Notifier.Modules {
     internal static class DI {
-        private static readonly IConfigurationRoot logConfig = new ConfigurationBuilder()
-           .SetBasePath(Directory.GetCurrentDirectory())
+		private static readonly string BasePath = AppDomain.CurrentDomain.BaseDirectory;
+
+		private static readonly IConfigurationRoot logConfig = new ConfigurationBuilder()
+           .SetBasePath(BasePath)
            .Build();
 		private static readonly IConfigurationRoot configuration = new ConfigurationBuilder()
-		   .SetBasePath(Directory.GetCurrentDirectory())
-           .AddJsonFile("Config File/config.json", optional: false, reloadOnChange: true)
+		   .SetBasePath(BasePath)
+           .AddJsonFile($"Config File{Path.DirectorySeparatorChar}config.json", optional: false, reloadOnChange: true)
 		   .Build();
 
 		internal static IServiceProvider BuildDiAll() {
