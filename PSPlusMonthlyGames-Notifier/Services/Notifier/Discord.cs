@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using PSPlusMonthlyGames_Notifier.Models.Config;
 using PSPlusMonthlyGames_Notifier.Models.PostContent;
@@ -8,18 +9,15 @@ using PSPlusMonthlyGames_Notifier.Strings;
 using System.Text;
 
 namespace IndiegalaFreebieNotifier.Notifier {
-	public class Discord : INotifiable {
-		private readonly ILogger<Discord> _logger;
+	public class Discord(ILogger<Discord> logger, IOptions<Config> config) : INotifiable {
+		private readonly ILogger<Discord> _logger = logger;
+		private readonly Config config = config.Value;
 
 		#region debug strings
 		private readonly string debugSendMessage = "Send notification to Discord";
 		#endregion
 
-		public Discord(ILogger<Discord> logger) {
-			_logger = logger;
-		}
-
-		public async Task SendMessage(NotifyConfig config, List<FreeGameRecord> records) {
+		public async Task SendMessage(List<FreeGameRecord> records) {
 			try {
 				_logger.LogDebug(debugSendMessage);
 

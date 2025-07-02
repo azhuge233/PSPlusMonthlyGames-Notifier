@@ -5,16 +5,14 @@ using HtmlAgilityPack;
 using PSPlusMonthlyGames_Notifier.Models.Config;
 using PSPlusMonthlyGames_Notifier.Models.Record;
 using PSPlusMonthlyGames_Notifier.Strings;
+using Microsoft.Extensions.Options;
 
 namespace PSPlusMonthlyGames_Notifier.Services.Notifier {
-    internal class Barker: INotifiable {
-		private readonly ILogger<Barker> _logger;
+    internal class Barker(ILogger<Barker> logger, IOptions<Config> config) : INotifiable {
+		private readonly ILogger<Barker> _logger = logger;
+		private readonly Config config = config.Value;
 
-		public Barker(ILogger<Barker> logger) {
-			_logger = logger;
-		}
-
-		public async Task SendMessage(NotifyConfig config, List<FreeGameRecord> records) {
+		public async Task SendMessage(List<FreeGameRecord> records) {
 			try {
 				var sb = new StringBuilder();
 				string url = new StringBuilder().AppendFormat(NotifyFormatString.barkUrlFormat, config.BarkAddress, config.BarkToken).ToString();

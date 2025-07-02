@@ -5,12 +5,8 @@ using PSPlusMonthlyGames_Notifier.Models.Record;
 using PSPlusMonthlyGames_Notifier.Strings;
 
 namespace PSPlusMonthlyGames_Notifier.Services {
-	internal class JsonOP : IDisposable {
-		private readonly ILogger<JsonOP> _logger;
-
-		public JsonOP(ILogger<JsonOP> logger) {
-			_logger = logger;
-		}
+	internal class JsonOP(ILogger<JsonOP> logger) : IDisposable {
+		private readonly ILogger<JsonOP> _logger = logger;
 
 		public void WriteData(List<FreeGameRecord> data) {
 			try {
@@ -41,17 +37,6 @@ namespace PSPlusMonthlyGames_Notifier.Services {
 			}
 		}
 
-		public Config LoadConfig() {
-			try {
-				_logger.LogDebug(JsonOPString.debugLoadConfig);
-				var content = JsonConvert.DeserializeObject<Config>(File.ReadAllText(JsonOPString.configPath));
-				_logger.LogDebug($"Done: {JsonOPString.debugLoadConfig}");
-				return content ?? new Config();
-			} catch (Exception) {
-				_logger.LogError($"Error: {JsonOPString.debugLoadConfig}");
-				throw;
-			}
-		}
 		public void Dispose() {
 			GC.SuppressFinalize(this);
 		}

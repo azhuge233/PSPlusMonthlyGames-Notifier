@@ -1,17 +1,15 @@
 ﻿using HtmlAgilityPack;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using PSPlusMonthlyGames_Notifier.Models.Config;
 using PSPlusMonthlyGames_Notifier.Strings;
 
 namespace PSPlusMonthlyGames_Notifier.Services {
-    internal class Scraper: IDisposable {
-		private readonly ILogger<Scraper> _logger;
+    internal class Scraper(ILogger<Scraper> logger, IOptions<Config> config) : IDisposable {
+		private readonly ILogger<Scraper> _logger = logger;
+		private readonly Config config = config.Value;
 
-		public Scraper(ILogger<Scraper> logger) {
-			_logger = logger;
-		}
-
-		public HtmlDocument GetSource(Config config) {
+		public HtmlDocument GetSource() {
 			string url = ScrapeString.UrlMap[config.InfoSource.ToLower()];
 			_logger.LogDebug(ScrapeString.debugGetPageSource, url);
 

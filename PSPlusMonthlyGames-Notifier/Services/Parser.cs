@@ -1,22 +1,17 @@
 ﻿using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.DependencyInjection;
 using HtmlAgilityPack;
 using PSPlusMonthlyGames_Notifier.Strings;
 using PSPlusMonthlyGames_Notifier.Models.Record;
-using PSPlusMonthlyGames_Notifier.Modules;
 using PSPlusMonthlyGames_Notifier.Models.Config;
 using System.Text;
+using Microsoft.Extensions.Options;
 
 namespace PSPlusMonthlyGames_Notifier.Services {
-	internal class Parser : IDisposable {
-		private readonly ILogger<Parser> _logger;
-		private readonly IServiceProvider services = DI.BuildDiScraperOnly();
+	internal class Parser(ILogger<Parser> logger, IOptions<Config> config, Scraper scraper) : IDisposable {
+		private readonly ILogger<Parser> _logger = logger;
+		private readonly Config config = config.Value;
 
-		public Parser(ILogger<Parser> logger) {
-			_logger = logger;
-		}
-
-		public Tuple<List<FreeGameRecord>, List<FreeGameRecord>> Parse(HtmlDocument htmlDoc, List<FreeGameRecord> oldRecords, Config config) {
+		public Tuple<List<FreeGameRecord>, List<FreeGameRecord>> Parse(HtmlDocument htmlDoc, List<FreeGameRecord> oldRecords) {
 			try {
 				_logger.LogDebug(ParseString.debugHtmlParser);
 
@@ -154,7 +149,7 @@ namespace PSPlusMonthlyGames_Notifier.Services {
 			try {
 				_logger.LogDebug(ParseString.debugGetPostContent, url);
 
-				var source = services.GetRequiredService<Scraper>().GetPostContent(url);
+				var source = scraper.GetPostContent(url);
 
 				_logger.LogDebug($"Done: {ParseString.debugGetPostContent}", url);
 				return source;

@@ -1,19 +1,17 @@
 ﻿using Microsoft.Extensions.Logging;
-using Telegram.Bot;
-using Telegram.Bot.Types.Enums;
+using Microsoft.Extensions.Options;
 using PSPlusMonthlyGames_Notifier.Models.Config;
 using PSPlusMonthlyGames_Notifier.Models.Record;
 using PSPlusMonthlyGames_Notifier.Strings;
+using Telegram.Bot;
+using Telegram.Bot.Types.Enums;
 
 namespace PSPlusMonthlyGames_Notifier.Services.Notifier {
-    internal class TgBot: INotifiable {
-		private readonly ILogger<TgBot> _logger;
+    internal class TgBot(ILogger<TgBot> logger, IOptions<Config> config) : INotifiable {
+		private readonly ILogger<TgBot> _logger = logger;
+		private readonly Config config = config.Value;
 
-		public TgBot(ILogger<TgBot> logger) {
-			_logger = logger;
-		}
-
-		public async Task SendMessage(NotifyConfig config, List<FreeGameRecord> records) {
+		public async Task SendMessage(List<FreeGameRecord> records) {
 			var BotClient = new TelegramBotClient(token: config.TelegramToken ?? string.Empty);
 
 			try {

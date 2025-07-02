@@ -1,15 +1,14 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using PSPlusMonthlyGames_Notifier.Models.Config;
 using PSPlusMonthlyGames_Notifier.Strings;
 
 namespace PSPlusMonthlyGames_Notifier.Services {
-    internal class ConfigValidator: IDisposable {
-		private readonly ILogger<ConfigValidator> _logger;
-		public ConfigValidator(ILogger<ConfigValidator> logger) {
-			_logger = logger;
-		}
+    internal class ConfigValidator(ILogger<ConfigValidator> logger, IOptions<Config> config) : IDisposable {
+		private readonly ILogger<ConfigValidator> _logger = logger;
+		private readonly Config config = config.Value;
 
-		internal void CheckValid(Config config) {
+		internal void CheckValid() {
 			try {
 				_logger.LogDebug(ConfigValidatorString.debugCheckValid);
 
