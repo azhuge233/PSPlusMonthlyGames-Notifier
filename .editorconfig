@@ -9,6 +9,8 @@ dotnet_diagnostic.CA2254.severity = none
 # CA1304: 指定 CultureInfo
 dotnet_diagnostic.CA1304.severity = silent
 
+dotnet_diagnostic.CA1873.severity = silent
+
 [*.cs]
 #### 命名样式 ####
 
