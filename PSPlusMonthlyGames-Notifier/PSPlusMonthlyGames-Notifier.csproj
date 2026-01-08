@@ -5,7 +5,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <RootNamespace>PSPlusMonthlyGames_Notifier</RootNamespace>
 	  <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
-	  <PublishSingleFile Condition="'$(Configuration)' == 'Release'">true</PublishSingleFile>
+	  <PublishSingleFile Condition="'$(Configuration)' == 'Release'">false</PublishSingleFile>
     <PublishTrimmed>false</PublishTrimmed>
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
     <SatelliteResourceLanguages>en;zh-Hans</SatelliteResourceLanguages>
