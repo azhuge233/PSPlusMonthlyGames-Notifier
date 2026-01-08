@@ -1,27 +1,27 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace PSPlusMonthlyGames_Notifier.Models.PostContent {
 	internal class Footer {
-		[JsonProperty("text")]
+		[JsonPropertyName("text")]
 		public string Text { get; set; }
 
 	}
 	internal class Embed {
-		[JsonProperty("title")]
+		[JsonPropertyName("title")]
 		public string Title { get; set; }
-		[JsonProperty("url")]
+		[JsonPropertyName("url")]
 		public string Url { get; set; }
-		[JsonProperty("description")]
+		[JsonPropertyName("description")]
 		public string Description { get; set; }
-		[JsonProperty("color")]
+		[JsonPropertyName("color")]
 		public int Color { get; set; } = 28881;
-		[JsonProperty("footer")]
+		[JsonPropertyName("footer")]
 		public Footer Footer { get; set; }
 	}
 	internal class DiscordPostContent {
-		[JsonProperty("content")]
+		[JsonPropertyName("content")]
 		public string Content { get; set; }
-		[JsonProperty("embeds")]
+		[JsonPropertyName("embeds")]
 		public List<Embed> Embeds { get; set; } = new List<Embed>();
 	}
 }

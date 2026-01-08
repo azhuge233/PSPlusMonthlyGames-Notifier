@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using PSPlusMonthlyGames_Notifier.Models.Config;
 using PSPlusMonthlyGames_Notifier.Models.Record;
 using PSPlusMonthlyGames_Notifier.Models.WebSocketContent;
 using PSPlusMonthlyGames_Notifier.Strings;
 using System.Net.WebSockets;
+using System.Text.Json;
 using Websocket.Client;
 
 namespace PSPlusMonthlyGames_Notifier.Services.Notifier {
@@ -24,7 +24,7 @@ namespace PSPlusMonthlyGames_Notifier.Services.Notifier {
 				await client.Start();
 
 				foreach (var packet in packets) {
-					await client.SendInstant(JsonConvert.SerializeObject(packet));
+					await client.SendInstant(JsonSerializer.Serialize(packet));
 					await Task.Delay(600);
 				}
 
@@ -53,13 +53,13 @@ namespace PSPlusMonthlyGames_Notifier.Services.Notifier {
 		}
 
 		private static List<WSPacket> GetSendPacket(NotifyConfig config, List<FreeGameRecord> records) {
-			return records.Select(record => new WSPacket() {
+			return [.. records.Select(record => new WSPacket() {
 				Action = NotifyFormatString.qqWebSocketSendAction,
 				Params = new Param {
 					UserID = config.ToQQID,
 					Message = $"{record.ToQQMessage()}{NotifyFormatString.projectLink}"
 				}
-			}).ToList();
+			})];
 		}
 
 		public void Dispose() {

@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using PSPlusMonthlyGames_Notifier.Models.Config;
 using PSPlusMonthlyGames_Notifier.Models.PostContent;
 using PSPlusMonthlyGames_Notifier.Models.Record;
 using PSPlusMonthlyGames_Notifier.Strings;
 using System.Text;
+using System.Text.Json;
 
 namespace PSPlusMonthlyGames_Notifier.Services.Notifier {
     internal class QQHttp(ILogger<QQHttp> logger, IOptions<Config> config) : INotifiable {
@@ -32,7 +32,7 @@ namespace PSPlusMonthlyGames_Notifier.Services.Notifier {
 
 					content.Message = $"{record.ToQQMessage()}{NotifyFormatString.projectLink}";
 
-					data = new StringContent(JsonConvert.SerializeObject(content), Encoding.UTF8, "application/json");
+					data = new StringContent(JsonSerializer.Serialize(content), Encoding.UTF8, "application/json");
 					resp = await client.PostAsync(url, data);
 
 					_logger.LogDebug(await resp.Content.ReadAsStringAsync());
