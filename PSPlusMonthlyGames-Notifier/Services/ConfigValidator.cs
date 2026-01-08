@@ -13,7 +13,7 @@ namespace PSPlusMonthlyGames_Notifier.Services {
 				_logger.LogDebug(ConfigValidatorString.debugCheckValid);
 
 				if (!ConfigValidatorString.ValidInfoSources.Contains(config.InfoSource.ToLower()))
-					throw new Exception(message: "Please select a valid info source: PSBlog, PSNine");
+					throw new Exception(message: "Please select a valid info source: PSBlog, PSNine or StoreAPI");
 
 				//Telegram
 				if (config.EnableTelegram) {
