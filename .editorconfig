@@ -78,6 +78,12 @@ csharp_style_namespace_declarations = block_scoped:silent
 # CA1862: 使用 "StringComparison" 方法重载来执行不区分大小写的字符串比较
 dotnet_diagnostic.CA1862.severity = silent
 
+# SYSLIB1045: 转换为“GeneratedRegexAttribute”。
+dotnet_diagnostic.SYSLIB1045.severity = silent
+
+# CA1822: 将成员标记为 static
+dotnet_diagnostic.CA1822.severity = silent
+
 [*.vb]
 #### 命名样式 ####
 
