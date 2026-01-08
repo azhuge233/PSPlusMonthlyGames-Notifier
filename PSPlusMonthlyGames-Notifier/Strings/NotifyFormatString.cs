@@ -6,7 +6,7 @@
 			"<b>{0}</b>\n\n" +
 			"<i>{1}</i>\n\n" +
 			"Link：<a href=\"{2}\">{0}</a>\n\n" +
-			"#PlayStation #PSPlus";
+			"#PlayStation #PSPlus #{3}";
 
 		internal const string barkPushFormat =
 			"{0}\n\n" +

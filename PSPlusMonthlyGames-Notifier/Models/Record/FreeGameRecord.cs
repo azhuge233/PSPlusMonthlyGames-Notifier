@@ -9,43 +9,57 @@ namespace PSPlusMonthlyGames_Notifier.Models.Record {
 
         #region ToMessage()
         internal string ToTelegramMessage() {
-            return new StringBuilder().AppendFormat(NotifyFormatString.telegramPushFormat, Title, SubTitle, Url).ToString();
+            return string.Format(NotifyFormatString.telegramPushFormat, Title, SubTitle, Url, RemoveSpecialCharactersForTag(Title));
         }
 
         internal string ToBarkMessage() {
-            return new StringBuilder().AppendFormat(NotifyFormatString.barkPushFormat, Title, SubTitle, Url).ToString();
+            return string.Format(NotifyFormatString.barkPushFormat, Title, SubTitle, Url);
         }
 
         internal string ToEmailMessage() {
-            return new StringBuilder().AppendFormat(NotifyFormatString.emailPushHtmlFormat, Title, SubTitle, Url).ToString();
+            return string.Format(NotifyFormatString.emailPushHtmlFormat, Title, SubTitle, Url);
         }
 
         internal string ToQQMessage() {
-            return new StringBuilder().AppendFormat(NotifyFormatString.qqPushFormat, Title, SubTitle, Url).ToString();
+            return string.Format(NotifyFormatString.qqPushFormat, Title, SubTitle, Url);
         }
 
         internal string ToPushPlusMessage() {
-            return new StringBuilder().AppendFormat(NotifyFormatString.pushPlusPushHtmlFormat, Title, SubTitle, Url).ToString();
+            return string.Format(NotifyFormatString.pushPlusPushHtmlFormat, Title, SubTitle, Url);
         }
 
         internal string ToDingTalkMessage() {
-            return new StringBuilder().AppendFormat(NotifyFormatString.dingTalkPushFormat, Title, SubTitle, Url).ToString();
+            return string.Format(NotifyFormatString.dingTalkPushFormat, Title, SubTitle, Url);
         }
 
         internal string ToPushDeerMessage() {
-            return new StringBuilder().AppendFormat(NotifyFormatString.pushDeerPushFormat, Title, SubTitle, Url).ToString();
+            return string.Format(NotifyFormatString.pushDeerPushFormat, Title, SubTitle, Url);
         }
 
         internal string ToDiscordMessage() {
-            return new StringBuilder().AppendFormat(NotifyFormatString.discordPushFormat, SubTitle, Url).ToString();
+            return string.Format(NotifyFormatString.discordPushFormat, SubTitle, Url);
         }
 
 		internal string ToMeowMessage() {
-			return new StringBuilder().AppendFormat(NotifyFormatString.meowPushFormat, Title, SubTitle, Url).ToString();
+			return string.Format(NotifyFormatString.meowPushFormat, Title, SubTitle, Url);
 		}
 		#endregion
 
-		#region function methods
+		#region other functions
+		public static string RemoveSpecialCharactersForTag(string input) {
+			if (string.IsNullOrEmpty(input)) return input;
+
+			var sb = new StringBuilder();
+
+			foreach (char c in input) {
+				if (char.IsLetterOrDigit(c) || c == '_') sb.Append(c);
+			}
+
+			return sb.ToString();
+		}
+		#endregion
+
+		#region compare methods
 		public static bool operator ==(FreeGameRecord a, FreeGameRecord b) { 
             if(ReferenceEquals(a, b)) return true;
             if(a is null || b is null) return false;
