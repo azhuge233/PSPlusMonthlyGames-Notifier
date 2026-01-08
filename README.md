@@ -19,7 +19,8 @@ dotnet publish -c Release -p:PublishDir=/your/path/here -r [win-x64/osx-x64/linu
 ## Usage
 
 1. Set `InfoSource` in config.json.
-   - Only `PSBlog` and `PSNine` are available.
+   - Only `PSBlog`, `PSNine` and `StoreAPI` are available.
+   - `StoreAPI` is recommended.
 2. Set your telegram bot token and chat ID in config.json.
 
 Check [wiki](https://github.com/azhuge233/PSPlusMonthlyGames-Notifier/wiki) for more explanation.
