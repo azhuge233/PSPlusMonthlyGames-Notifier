@@ -1,6 +1,6 @@
 # PSPlusMonthlyGames-Notifier
 
-A CLI tool fetches monthly free games info from [PSNine](https://psnine.com/psnid/sakauenachi/topic) or [PlayStation PSPlus Blog page](https://blog.zh-hant.playstation.com/category/ps-plus/) (HK), sends notifications through Telegram, Email, Bark, QQ, PushPlus, DingTalk, PushDeer, Discord and MeoW.
+A CLI tool fetches monthly free games (Tier Essential) info from PSStore (HK) API, [PSNine](https://psnine.com/psnid/sakauenachi/topic) or [PlayStation PSPlus Blog page](https://blog.zh-hant.playstation.com/category/ps-plus/) (HK), sends notifications to Telegram, Email, Bark, QQ, PushPlus, DingTalk, PushDeer, Discord and MeoW.
 
 Demo Telegram Channel [@azhuge233_FreeGames](https://t.me/azhuge233_FreeGames)
 
@@ -19,7 +19,8 @@ dotnet publish -c Release -p:PublishDir=/your/path/here -r [win-x64/osx-x64/linu
 ## Usage
 
 1. Set `InfoSource` in config.json.
-   - Only `PSBlog` and `PSNine` are available.
+   - Only `PSBlog`, `PSNine` and `StoreAPI` are available.
+   - `StoreAPI` is recommended.
 2. Set your telegram bot token and chat ID in config.json.
 
 Check [wiki](https://github.com/azhuge233/PSPlusMonthlyGames-Notifier/wiki) for more explanation.
