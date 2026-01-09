@@ -28,7 +28,7 @@ jobs:
       shell: pwsh
       run: |
         Set-Location "$env:GITHUB_WORKSPACE"
-        dotnet publish -c release -r win-x64 -p:PublishDir="$GITHUB_WORKSPACE\Release\win-x64" --sc --nologo
+        dotnet publish -c release -r win-x64 -p:PublishDir="$env:GITHUB_WORKSPACE\Release\win-x64" --sc --nologo
         Compress-Archive -Path "$env:GITHUB_WORKSPACE\Release\win-x64" -DestinationPath "PSPlus-win-x64.zip"
         
     - name: Create Release
