@@ -4,6 +4,10 @@ A CLI tool fetches monthly free games (Tier Essential) info from PSStore (HK) AP
 
 Demo Telegram Channel [@azhuge233_FreeGames](https://t.me/azhuge233_FreeGames)
 
+## Credits
+
+- [mrt1m/playstation-store-api](https://github.com/mrt1m/playstation-store-api)
+
 ## Build
 
 Install dotnet 10.0 SDK first, you can find installation packages/guides [here](https://dotnet.microsoft.com/download).
