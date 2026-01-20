@@ -16,7 +16,7 @@ namespace PSPlusMonthlyGames_Notifier.Models.GraphQL {
 
 	public class PageArgs {
 		[JsonPropertyName("size")]
-		public int Size { get; set; } = 10;
+		public int Size { get; set; } = 100;
 
 		[JsonPropertyName("offset")]
 		public int Offset { get; set; } = 0;
