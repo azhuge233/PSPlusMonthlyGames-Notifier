@@ -2,7 +2,7 @@
 
 A CLI tool fetches monthly free games (Tier Essential) info from PSStore (HK) API, [PSNine](https://psnine.com/psnid/sakauenachi/topic) or [PlayStation PSPlus Blog page](https://blog.zh-hant.playstation.com/category/ps-plus/) (HK), sends notifications to Telegram, Email, Bark, QQ, PushPlus, DingTalk, PushDeer, Discord and MeoW.
 
-Demo Telegram Channel [@azhuge233_FreeGames](https://t.me/azhuge233_FreeGames)
+Demo Telegram Channel [@azhuge233_FreeGames](https://telegram.me/azhuge233_FreeGames)
 
 ## Credits
 
